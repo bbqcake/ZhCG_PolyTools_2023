@@ -1,8 +1,8 @@
 # ZhCG_PolyTools
 
 Updated to work with maya 2023. Sourced from https://www.highend3d.com/maya/script/zhcg_polytools-for-maya-54377
-All credit to the original author:
-Author: ZhCG
+All credit to the original Author:
+ZhCG
 zhcg6740411@gmail.com
 
 # Installation
