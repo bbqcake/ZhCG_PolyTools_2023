@@ -1,0 +1,1 @@
+python("import maya.cmds as mc; import zhcg_polyTools");
