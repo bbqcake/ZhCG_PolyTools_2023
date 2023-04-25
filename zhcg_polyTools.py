@@ -1999,22 +1999,24 @@ def mirrorPolyUI():
         mc.button(l='Create Mirror', c='%s.createMirror()' % __name__)
         mc.showWindow('zhcg_polyTools_mirrorPolyUI')
 
-
+# TODO: BROKEN. fix it
 def createMirror():
     pf_61()
     meshs = pf_30()
-    if meshs:
+    if meshs:        
         msgs = ''
         for mesh in meshs:
-            if not pf_74(mesh, 'mirrorMode'):
+            if not pf_74(mesh, 'mirrorMode'):                
                 mc.undoInfo(ock=True)
                 mc.addAttr(mesh, ln='mirrorMode', dt='string', h=True)
                 mc.addAttr(mesh, ln='centerLine', at='enum', en='False:True:', h=True)
                 mc.addAttr(mesh, ln='threshold', at='float', h=True)
                 if pf_73('zhcg_polyTools_mirrorPolyUI'):
+                    print('pf_73 active')
                     mc.setAttr(mesh + '.centerLine', mc.checkBox(CB_center, q=True, v=True))
                     mc.setAttr(mesh + '.threshold', mc.floatSliderGrp(FSG_threshold, q=True, v=True))
                 else:
+                    print('no 73')
                     mc.setAttr(mesh + '.centerLine', True)
                     mc.setAttr(mesh + '.threshold', mc.symmetricModelling(q=True, t=True))
                 if mc.optionVar(q='zhcg_polyTools_mirror_mode') == 1:
@@ -2770,7 +2772,7 @@ class pf_69(object):
             return self.__class__(self.x / float(num), self.y / float(num), self.z// float(num))
         raise TypeError('Illegal argument type!')
     
-    # Added for python 3
+    # Added for python 3    
     def __truediv__(self, num):
         if isinstance(num, pf_69):
             self.x / num
@@ -2784,7 +2786,7 @@ class pf_69(object):
             return self
         else:
             raise TypeError("Unsupported operand type for division.")
-        
+    
 
     def __idiv__(self, num):
         if isinstance(num, (int, float)):
@@ -3264,8 +3266,7 @@ def pf_14(selFaces):
                  len(interEdges),
                  len(interVtxs)]).replace(' ', '')
                 if pat in gridDict2:
-                    return gridDict2[pat]
-
+                    return gridDict2[pat]                
 
 def pf_15(faces, selMode = 'facet'):
     interEdges = pf_64(faces)
@@ -3832,13 +3833,20 @@ def pf_43(vtxGrp, even):
             pos = oldPosGroup[0] + (oldPosGroup[-1] - oldPosGroup[0]) * sum(ratios[:i])
             mc.xform(vtxGrp[i], os=True, t=pos.toTuple())
 
-    else:
-        div = len(vtxGrp) - 1
+    else:        
+        div = len(vtxGrp) - 1             
         startPos = pf_69(mc.xform(vtxGrp[0], q=True, os=True, t=True))
-        endPos = pf_69(mc.xform(vtxGrp[-1], q=True, os=True, t=True))
-        for i in range(1, len(vtxGrp)):
-            pos = startPos + (endPos - startPos) / div * i
+        endPos = pf_69(mc.xform(vtxGrp[-1], q=True, os=True, t=True)) 
+        print("startPos: ", startPos)
+        print("endPos: ", endPos)          
+        for i in range(1, len(vtxGrp)):                                
+            # separated each startPos and endPos to calculate individually. works!
+            pos = pf_69(startPos.x + (endPos.x - startPos.x) * i / div,
+            startPos.y + (endPos.y - startPos.y) * i / div,
+            startPos.z + (endPos.z - startPos.z) * i / div)                                      
             mc.xform(vtxGrp[i], os=True, t=pos.toTuple())
+
+        
 
 
 def pf_44(vtxGrp, close, mesh, even, smooth, step, axis):
