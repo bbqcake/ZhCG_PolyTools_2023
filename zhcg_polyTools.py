@@ -2064,7 +2064,7 @@ def toggleMirror():
     pf_22()
 
 
-def takeHalf():
+def takeHalf():    
     pf_61()
     meshs = pf_30()
     if meshs:
@@ -3730,7 +3730,7 @@ def pf_39(mesh):
         vtxsNum = mc.polyEvaluate(mesh, v=True)
         halfVtxs = []
         reverse = False
-        selComps = pf_06()
+        selComps = pf_06()        
         if selComps:
             selComps = selComps[0]
             selCompsPosGroup = pf_69.vectorList(mc.xform(selComps, q=True, os=True, t=True))
@@ -3740,19 +3740,20 @@ def pf_39(mesh):
                     break
 
         vtxPosGrp = mc.xform('%s.vtx[0:%s]' % (mesh, vtxsNum - 1), q=True, os=True, t=True)
+                
         for i in range(0, vtxsNum * 3, 3):
-            if reverse:
+            if reverse:                
                 if vtxPosGrp[i] >= -threshold:
-                    halfVtxs.append(pf_33(mesh, 'vtx', i / 3))
-            elif vtxPosGrp[i] <= threshold:
-                halfVtxs.append(pf_33(mesh, 'vtx', i / 3))
-
-        if halfVtxs:
+                    halfVtxs.append(pf_33(mesh, 'vtx', int(i / 3)))
+            elif vtxPosGrp[i] <= threshold:                
+                halfVtxs.append(pf_33(mesh, 'vtx', int(i / 3)))        
+        if halfVtxs:            
             if centerLine:
-                halfFaces = mc.polyListComponentConversion(halfVtxs, fv=True, tf=True, internal=True)
+                halfFaces = mc.polyListComponentConversion(halfVtxs, fv=True, tf=True, internal=True)                
             else:
                 halfFaces = mc.polyListComponentConversion(halfVtxs, fv=True, tf=True)
-            if halfFaces:
+                
+            if halfFaces:                            
                 mc.delete(halfFaces)
 
 
