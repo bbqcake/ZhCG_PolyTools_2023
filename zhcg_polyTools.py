@@ -2167,7 +2167,7 @@ def getCenterVtxs():
         vtxPosGrp = mc.xform('%s.vtx[0:%s]' % (mesh, vtxsNum - 1), q=True, os=True, t=True)
         for i in range(0, vtxsNum * 3, 3):
             if abs(vtxPosGrp[i]) <= threshold:
-                centerVtxs.append(pf_33(mesh, 'vtx', i / 3))
+                centerVtxs.append(pf_33(mesh, 'vtx', int(i / 3)))
 
         if centerVtxs:
             mm.eval('doMenuComponentSelection("%s", "vertex")' % mesh)
