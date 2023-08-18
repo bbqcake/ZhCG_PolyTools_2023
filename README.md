@@ -1,7 +1,7 @@
 # ZhCG_PolyTools
 
-Updated to work with maya 2023. Sourced from https://www.highend3d.com/maya/script/zhcg_polytools-for-maya-54377
-Thanks to [impivot](https://github.com/impivot) for finding bugs with Edit Facets and fixing them.
+Updated to work with maya 2023. Sourced from https://www.highend3d.com/maya/script/zhcg_polytools-for-maya-54377\
+Thanks to [impivot](https://github.com/impivot) for finding bugs with Edit Facets and fixing them.\
 Thanks to [Mech_Addict](https://polycount.com/profile/Mech_Addict) for testing and finding bugs.
 
 Current known issue:
