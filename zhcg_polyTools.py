@@ -1142,7 +1142,7 @@ def spin(spinType = None, dialog = False, reverse = False):
             opNum += 1
 
 
-def editFacet():
+def editFacet():    
     pf_61()
     delMeshHistory()
     opNum = 0
@@ -1196,7 +1196,7 @@ def editFacet():
                             message += "It's H-shape. "
                         elif pf_11(selFaces):
                             curType = 'star'
-                            message += "It's %s-star. " % (outlineEdgesNum / 2)
+                            message += "It's %s-star. " % (outlineEdgesNum // 2)
                         elif pf_14(selFaces):
                             curType = pf_14(selFaces)
                             message += "It's %s-grid. " % curType
@@ -1218,11 +1218,11 @@ def editFacet():
                             if outlineEdgesNum == 4:
                                 availableTypes[i] = 'Quad Face'
                             else:
-                                availableTypes[i] = '%s-%s' % ((outlineEdgesNum - 2) / 2, availableTypes[i])
+                                availableTypes[i] = '%s-%s' % ((outlineEdgesNum - 2) // 2, availableTypes[i])
                         elif availableTypes[i] == 'star':
-                            availableTypes[i] = '%s-%s' % (outlineEdgesNum / 2, availableTypes[i])
+                            availableTypes[i] = '%s-%s' % (outlineEdgesNum // 2, availableTypes[i])
                         elif availableTypes[i] == 'loop':
-                            availableTypes[i] = '%s-%s' % (outlineEdgesNum / 2, availableTypes[i])
+                            availableTypes[i] = '%s-%s' % (outlineEdgesNum // 2, availableTypes[i])
 
                     buttons = availableTypes
                     if curType == 'loop' or curType == '2faces' and outlineEdgesNum % 2:
@@ -4067,8 +4067,8 @@ def pf_52(selMode, reverse, speed):
             startId = i
             break
 
-    step = vtxNum / 4 if speed == 3 else speed
-    for i in range(vtxNum / 2 - 2):
+    step = vtxNum // 4 if speed == 3 else speed
+    for i in range(vtxNum // 2 - 2):
         pf_24(sortedVtxs[(startId + i + step) % vtxNum], sortedVtxs[(startId - (i + 3) + step) % vtxNum])
 
     newFaces = mc.polyListComponentConversion(sortedVtxs, fv=True, tf=True, internal=True)
@@ -4118,7 +4118,7 @@ def pf_53(selMode, reverse, speed, gridType, mesh, targetMesh):
     num1 -= 1
     num3 = num2 - 1
     num2 += 2
-    step = vtxNum / 4 if speed == 3 else speed
+    step = vtxNum // 4 if speed == 3 else speed
     for i in range(vtxNum):
         if i not in connerVtxsIds and (i - num2) % vtxNum not in connerVtxsIds and (i - 1) % vtxNum in connerVtxsIds and (i - num2 + 1) % vtxNum in connerVtxsIds:
             startId = (i - step) % vtxNum
@@ -4142,7 +4142,7 @@ def pf_53(selMode, reverse, speed, gridType, mesh, targetMesh):
                 tem_startId = i
                 break
 
-        for i in range(tem_vtxNum / 2 - 2):
+        for i in range(tem_vtxNum // 2 - 2):
             pf_24(tem_sortedVtxs[(tem_startId + i) % tem_vtxNum], tem_sortedVtxs[(tem_startId - (i + 3)) % tem_vtxNum])
 
     mc.undoInfo(swf=False)
@@ -4288,7 +4288,7 @@ def pf_55(gridType, mesh):
                 tem_startId = i
                 break
 
-        for i in range(tem_vtxNum / 2 - 2):
+        for i in range(tem_vtxNum // 2 - 2):
             pf_24(tem_sortedVtxs[(tem_startId + i) % tem_vtxNum], tem_sortedVtxs[(tem_startId - (i + 3)) % tem_vtxNum])
 
     mc.undoInfo(swf=False)
@@ -4358,7 +4358,7 @@ def pf_57(mesh):
                     else:
                         startId = sortedVtxsEdgeNums.index(min(sortedVtxsEdgeNums))
 
-    for i in range(vtxNum / 2 - 2):
+    for i in range(vtxNum // 2 - 2):
         pf_24(sortedVtxs[(startId + i) % vtxNum], sortedVtxs[(startId - (i + 3)) % vtxNum])
 
     mc.select(mc.polyListComponentConversion(sortedVtxs, fv=True, tf=True, internal=True))
